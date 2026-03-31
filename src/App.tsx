@@ -87,21 +87,34 @@ const currentProgress = useRef(0);
               fontFamily: "'DM Sans',sans-serif" 
             }}
           >
-            <div className="flex items-center">
-              <img 
-                src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=120&h=120&fit=crop" 
-                alt="Avatar" 
-                className="w-[42px] h-[42px] rounded-full object-cover pointer-events-none drop-shadow-sm shrink-0"
-              />
-              <div className="flex items-center overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-0 opacity-0 group-hover:w-[69px] group-hover:opacity-100 group-hover:ml-3">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-white">
+            <div className="flex items-center relative">
+              <div className="relative z-10 w-[42px] h-[42px] shrink-0">
+                <img 
+                  src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=120&h=120&fit=crop" 
+                  alt="Avatar" 
+                  className="w-full h-full rounded-full object-cover pointer-events-none drop-shadow-sm"
+                />
+              </div>
+
+              {/* The "+" Sign sliding out */}
+              <div className="absolute z-[5] left-[42px] top-0 h-full w-[32px] flex items-center justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+                              opacity-0 -translate-x-4 group-hover:translate-x-0 group-hover:opacity-100">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                <div className="ml-3 w-[42px] h-[42px] bg-white rounded-full flex items-center justify-center text-black font-bold text-[14px] shrink-0 tracking-tight leading-none">
+              </div>
+
+              {/* The "You" Circle sliding out */}
+              <div className="absolute z-[4] left-0 top-0 h-full flex items-center transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+                              opacity-0 translate-x-0 group-hover:translate-x-[74px] group-hover:opacity-100">
+                <div className="w-[42px] h-[42px] bg-white rounded-full flex items-center justify-center text-black font-bold text-[14px] shrink-0 tracking-tight leading-none">
                   You
                 </div>
               </div>
+
+              {/* Invisible Spacer to push the text */}
+              <div className="transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-0 group-hover:w-[74px]"></div>
             </div>
             <span className="tracking-tight whitespace-nowrap">Book a call with me</span>
           </button>
