@@ -69,12 +69,40 @@ function CardMockup({ card, hovered }: { card: CardData; hovered: boolean }) {
         <span style={{ fontSize:7, color:card.dark?'rgba(255,255,255,.3)':'rgba(0,0,0,.3)' }}>100+ clients</span>
       </div>
 
-      {/* Hover pill */}
-      {hovered && (
-        <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', background:'rgba(255,255,255,.96)', color:'#0a0a0a', borderRadius:999, padding:'10px 22px', fontSize:13, fontWeight:600, boxShadow:'0 8px 32px rgba(0,0,0,.2)', whiteSpace:'nowrap', pointerEvents:'none', fontFamily:"'DM Sans',sans-serif" }}>
+      {/* Hover pop-up overlay */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: card.dark ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.4)',
+          backdropFilter: 'blur(4px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          opacity: hovered ? 1 : 0,
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          pointerEvents: 'none',
+          zIndex: 10
+        }}
+      >
+        <div style={{
+          background: 'rgba(255,255,255,.96)',
+          color: '#0a0a0a',
+          borderRadius: 999,
+          padding: '10px 22px',
+          fontSize: 13,
+          fontWeight: 600,
+          boxShadow: '0 8px 32px rgba(0,0,0,.2)',
+          whiteSpace: 'nowrap',
+          fontFamily: "'DM Sans',sans-serif",
+          transform: hovered ? 'translateY(0)' : 'translateY(16px)',
+          opacity: hovered ? 1 : 0,
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          transitionDelay: '0.05s'
+        }}>
           View Project
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -92,22 +120,68 @@ export function AnimatedCards({ progress }: AnimatedCardsProps) {
     return ()=>obs.disconnect();
   },[]);
 
-  const t = easeInOutCubic(clamp(progress, 0, 1));
+  // We limit the intro animation to the 0-1 range.
+  // Using easeInOutCubic for a graceful layout landing.
+  const t = easeInOutCubic(clamp(progress, 0, 1)); 
+  
+  // The scroll distance beyond 1 will natively push the cards up 
+  // so the second row comes into view.
+  const overScroll = Math.max(0, progress - 1); 
+  
   const { w:W, h:H } = size;
-  const gap = 10;
-  const finalW = W/2 - gap*1.5;
-  const finalH = H/2 - gap*1.5;
-  const baseW = 340, baseH = 220;
+  const gap = 20;
+
+  // Final layout geometry
+  const marginW = Math.max(40, W * 0.05);
+  const topMargin = Math.max(120, H * 0.15); 
+  
+  const finalW = (W - marginW * 2 - gap) / 2;
+  const finalH = H * 0.65; // Cards take up 65% of the viewport height each
+
+  // Base size when stacked
+  const baseW = 420, baseH = 260;
 
   return (
-    <div ref={containerRef} style={{ position:'relative', width:'100%', height:'100%', overflow:'hidden' }}>
+    <div ref={containerRef} style={{ position:'relative', width:'100%', height:'100%', overflow:'hidden', pointerEvents:'none' }}>
       {CARD_DATA.map((card, i) => {
         const ini = INIT_STATES[i];
         const col = i % 2, row = Math.floor(i/2);
-        const finCX = col===0 ? gap+finalW/2 : W-gap-finalW/2;
-        const finCY = row===0 ? gap+finalH/2 : H-gap-finalH/2;
-        const cx  = lerp(W/2+ini.x, finCX, t);
-        const cy  = lerp(H/2+ini.y, finCY, t);
+
+        // At t=0, origin is right side of the screen.
+        // The landing page limits content to max-w-[1300px] with px-10 (40px padding).
+        const maxContentW = Math.min(W, 1300);
+        const contentLeft = (W - maxContentW) / 2;
+        const colW = (maxContentW - 80) / 2; // 80 is px-10 * 2
+        // Right column center:
+        const rightColCenter = contentLeft + 40 + colW + colW / 2;
+        
+        const initCX = rightColCenter + ini.x;
+        // Shift initial stacked cards slightly lower on the screen
+        const initCY = H * 0.55 + ini.y + 10;
+
+        // At t=1, they form a vertical-overflow layout
+        // Instead of splitting the space to fit all 4, we treat row=0 and row=1 drastically differently.
+        const finCX = marginW + (col === 0 ? finalW / 2 : finalW + gap + finalW / 2);
+        
+        // Push row 1 way down below the screen initially
+        const finCY = topMargin + (row === 0 ? finalH / 2 : finalH + gap + finalH / 2);
+
+        // Also add a little arc so they swoop "down" during transition
+        const tArc = Math.sin(t * Math.PI);
+        const cx  = lerp(initCX, finCX, t) - (tArc * 30);
+        
+        // When t reaches 1, the grid is fully formed.
+        // We use a separate scroll variable beyond t=1 if App.tsx supports progress > 1, 
+        // but App currently clamps at progress=1. We need the scrolling wrapper.
+        
+        // We will tie the CY to a much larger space.
+        // If progress goes up to 1, row 1 will be offscreen.
+        // we need the height of a single row to take up most of the screen view.
+        // We calculate CY so that all 4 cards move up natively due to standard scrolling instead of pinning.
+        // As overScroll increases, we move up exactly at 1:1 speed with the browser scroll.
+        // Because progress = 1 per 1 window height (H) scrolled natively:
+        const scrollOffset = overScroll * H; 
+        const cy  = lerp(initCY, finCY, t) + (tArc * 80) - scrollOffset;
         const rot = lerp(ini.rot, 0, t);
         const w   = lerp(baseW, finalW, t);
         const h   = lerp(baseH, finalH, t);
@@ -123,11 +197,14 @@ export function AnimatedCards({ progress }: AnimatedCardsProps) {
               borderRadius:lerp(16,12,t),
               zIndex: isHov ? 100 : Math.round(lerp(ini.initZ, i+4, t)),
               boxShadow:`0 ${lerp(20,8,t)}px ${lerp(48,20,t)}px rgba(0,0,0,${sha})`,
+              transform:`rotate(${rot}deg) scale(${isHov?1.02:1}) translateY(${isHov?-8:0}px)`,
+              transition: t>0.9 ? 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
               cursor: t>0.85?'pointer':'default',
-              transform:`rotate(${rot}deg)`,
-              willChange:'transform,width,height,left,top',
+              pointerEvents:'auto',
               overflow:'hidden',
-            }}>
+              willChange:'transform,width,height,left,top'
+            }}
+          >
             <CardMockup card={card} hovered={isHov}/>
           </div>
         );

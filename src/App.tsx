@@ -1,36 +1,59 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
-import { AnimatedCards } from './components/AnimCard';
+import { AnimatedCards } from './components/Animcard';
 
 function App() {
   const [progress, setProgress]   = useState(0);
   const [showHint, setShowHint]   = useState(true);
   const heroRightRef              = useRef<HTMLDivElement>(null);
 
+const currentProgress = useRef(0);
+  const targetProgress = useRef(0);
+  const rafRef = useRef<number | null>(null);
+
   const onScroll = useCallback(() => {
     if (!heroRightRef.current) return;
     const rect  = heroRightRef.current.getBoundingClientRect();
-    const total = heroRightRef.current.offsetHeight - window.innerHeight;
-    const p     = -rect.top / (total * 0.7);
-    setProgress(p);
+    const total = heroRightRef.current.offsetHeight - window.innerHeight;       
+    // Lock progress to exactly viewport height: 1 progress unit = 100vh scroll.
+    // This makes the transition to "overScroll" perfectly match native browser scroll speed.
+    let p = -rect.top / window.innerHeight;
+    p = Math.max(0, p);
+    targetProgress.current = p;
     setShowHint(p < 0.04);
   }, []);
 
   useEffect(() => {
+    const updateProgress = () => {
+      // Lerp for smooth scrolling - increased to 0.14 for a more snappy "web native" feel
+      currentProgress.current += (targetProgress.current - currentProgress.current) * 0.14;
+      
+      // Only set state if the difference is meaningful to prevent micro-renders
+      if (Math.abs(currentProgress.current - targetProgress.current) > 0.0001) {
+        setProgress(currentProgress.current);
+      }
+      
+      rafRef.current = requestAnimationFrame(updateProgress);
+    };
+    rafRef.current = requestAnimationFrame(updateProgress);
+
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [onScroll]);
 
   return (
     <div className="bg-[#f5f5f0] min-h-screen">
       <Navbar />
 
-      {/* ── HERO ── */}
-      <div className="max-w-[1300px] mx-auto px-10 grid grid-cols-2 min-h-screen">
-
-        {/* LEFT — sticky */}
-        <div className="sticky top-0 h-screen flex flex-col justify-center pr-12 z-20">
+      {/* ── HERO CONTENT ── */}
+      <div className="max-w-[1300px] mx-auto px-10 grid grid-cols-2 min-h-screen relative z-10 pointer-events-none">
+        {/* LEFT — sticky text */}
+        <div className="sticky top-0 h-screen flex flex-col justify-center pr-12 pointer-events-auto">
           <div className="w-9 h-9 rounded-full bg-white border border-black/10 shadow-sm mb-7
                           animate-[fadeUp_.5s_ease_both]" />
 
@@ -96,14 +119,16 @@ function App() {
           </div>
         </div>
 
-        {/* RIGHT — scroll zone (210vh) → sticky cards viewport */}
-        <div ref={heroRightRef} className="min-h-[210vh] relative">
-          <div className="sticky top-0 h-screen py-6 pl-4">
-            {/*
-              AnimatedCards fills 100% of this container.
-              progress 0 = stacked/tilted fan
-              progress 1 = full 2×2 grid filling the right half
-            */}
+        {/* This invisible column just to maintain grid structure */}
+        <div className="relative pointer-events-none"></div>
+      </div>
+
+      {/* ── SCROLL TRIGER for CARDS ── */}
+      {/* We make the scroll container much taller to give plenty of room to scroll down through the cards */}
+      {/* We'll use 350vh so it maps beautifully to standard scroll without making it artificially too deep */}
+      <div ref={heroRightRef} className="min-h-[350vh] relative -mt-[100vh]">   
+        <div className="sticky top-0 w-full h-screen overflow-hidden z-20 pointer-events-none">
+          <div className="absolute inset-0">
             <AnimatedCards progress={progress} />
           </div>
         </div>
