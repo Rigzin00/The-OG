@@ -144,22 +144,25 @@ const currentProgress = useRef(0);
       {/* ── SPEAK TO ME floating CTA ── */}
       <div
         className="fixed bottom-7 left-1/2 -translate-x-1/2 z-50
-                   bg-white/95 backdrop-blur-xl rounded-full
-                   px-5 py-2.5 flex items-center gap-3
-                   shadow-[0_8px_32px_rgba(0,0,0,0.12)]
-                   border border-black/[0.07]
+                   bg-white/30 backdrop-blur-md rounded-full
+                   pl-6 pr-2 py-2 flex items-center gap-4
+                   shadow-[0_8px_32px_rgba(0,0,0,0.15)]
+                   border border-white/50
                    transition-opacity duration-500"
         style={{ opacity: progress > 0.3 ? 1 : 0 }}
       >
         <div>
-          <div className="text-[13px] font-semibold text-black leading-tight">Speak to me</div>
-          <div className="text-[11px] text-neutral-400">Email or book a call</div>
+          <div className="text-[15px] font-bold text-black leading-tight tracking-tight">Speak to me</div>
+          <div className="text-[13px] text-neutral-600 font-medium mt-0.5">Email or book a call</div>
         </div>
-        {['✉','📅'].map((ico, i) => (
-          <div key={i} className="w-9 h-9 rounded-full bg-black flex items-center justify-center text-base cursor-pointer hover:bg-neutral-800 transition-colors">
-            {ico}
+        <div className="flex gap-2 ml-2">
+          <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-lg cursor-pointer hover:bg-neutral-800 transition-all shadow-md">
+            ✉
           </div>
-        ))}
+          <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center text-lg cursor-pointer hover:bg-neutral-50 transition-all shadow-md">
+            📅
+          </div>
+        </div>
       </div>
 
       <style>{`
