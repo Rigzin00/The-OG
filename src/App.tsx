@@ -47,7 +47,7 @@ const currentProgress = useRef(0);
   }, [onScroll]);
 
   return (
-    <div className="bg-[#f5f5f0] min-h-screen">
+    <div className="bg-[#f5f5f0] min-h-screen relative overflow-x-clip">
       <Navbar />
 
       {/* ── HERO CONTENT ── */}
@@ -77,50 +77,104 @@ const currentProgress = useRef(0);
           </p>
 
           <button
-            className="inline-flex items-center gap-3 bg-black text-white rounded-full
-                       px-6 py-3 text-sm font-semibold w-fit cursor-pointer
-                       hover:bg-neutral-800 transition-colors
+            className="group inline-flex items-center gap-3.5 bg-[#0a0a0a] text-white rounded-full
+                       pl-1.5 pr-7 py-1.5 text-[16px] font-bold w-fit cursor-pointer
+                       border border-white/10 hover:scale-[1.02] hover:bg-black active:scale-95 
+                       transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]
                        animate-[fadeUp_.6s_.28s_ease_both] opacity-0 [animation-fill-mode:both]"
-            style={{ boxShadow: '0 12px 40px rgba(0,0,0,.22)', fontFamily: "'DM Sans',sans-serif" }}
+            style={{ 
+              boxShadow: '0 12px 40px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.15)', 
+              fontFamily: "'DM Sans',sans-serif" 
+            }}
           >
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-300 shrink-0 overflow-hidden flex items-center justify-center text-xs">
-              👤
-            </div>
-            Book a call with me
-          </button>
-
-          {/* Social proof */}
-          <div className="flex items-center gap-3 mt-8
-                          animate-[fadeUp_.6s_.38s_ease_both] opacity-0 [animation-fill-mode:both]">
-            <div className="flex">
-              {[0,1,2,3,4].map(i => (
-                <div key={i} className="w-7 h-7 rounded-full border-2 border-[#f5f5f0] flex items-center justify-center text-xs"
-                  style={{ background:`hsl(${i*35+20},55%,65%)`, marginLeft: i>0 ? -8 : 0, zIndex: 5-i }}>
-                  👤
+            <div className="flex items-center">
+              <img 
+                src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=120&h=120&fit=crop" 
+                alt="Avatar" 
+                className="w-[42px] h-[42px] rounded-full object-cover pointer-events-none drop-shadow-sm shrink-0"
+              />
+              <div className="flex items-center overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-0 opacity-0 group-hover:w-[69px] group-hover:opacity-100 group-hover:ml-3">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-white">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <div className="ml-3 w-[42px] h-[42px] bg-white rounded-full flex items-center justify-center text-black font-bold text-[14px] shrink-0 tracking-tight leading-none">
+                  You
                 </div>
-              ))}
+              </div>
             </div>
-            <div>
-              <div className="text-[11px] text-amber-500 tracking-wide">★★★★★</div>
-              <div className="text-[11px] text-neutral-400 mt-0.5">99+ Happy clients</div>
-            </div>
-          </div>
-
-          {/* Scroll hint */}
-          <div
-            className="absolute bottom-8 left-0 flex flex-col items-center gap-1.5 transition-opacity duration-500"
-            style={{ opacity: showHint ? 1 : 0 }}
-          >
-            <span className="text-[9px] font-bold tracking-[.16em] uppercase text-neutral-400"
-              style={{ fontFamily: "'Syne',sans-serif" }}>Scroll</span>
-            <div className="w-px h-8 bg-neutral-300 relative overflow-hidden">
-              <div className="absolute inset-x-0 h-full bg-black animate-[scrollLine_1.5s_ease-in-out_infinite]" />
-            </div>
-          </div>
+            <span className="tracking-tight whitespace-nowrap">Book a call with me</span>
+          </button>
         </div>
 
         {/* This invisible column just to maintain grid structure */}
         <div className="relative pointer-events-none"></div>
+      </div>
+
+      {/* ── LOGOS STRIP (Placed just after the Hero / Landing page) ── */}
+      <div className="absolute top-[100vh] left-0 w-full z-10 bg-[#f5f5f0] border-t border-b border-black/[0.07] pointer-events-auto">
+        <div className="py-10 px-10 flex items-center justify-between gap-8 max-w-[1300px] w-full mx-auto overflow-hidden">
+          {/* STATIC LEFT: Social Proof */}
+          <div className="flex items-center gap-4 shrink-0">
+            <div className="flex">
+              {[
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
+                'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop',
+                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop',
+                'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop'
+              ].map((imgUrl, i) => (
+                <img 
+                  key={i} 
+                  src={imgUrl} 
+                  alt="Client" 
+                  className="w-[36px] h-[36px] rounded-full border-[2.5px] border-[#f5f5f0] object-cover grayscale-[20%]" 
+                  style={{ marginLeft: i > 0 ? -12 : 0, zIndex: 5 - i }} 
+                />
+              ))}
+            </div>
+            <div>
+              <div className="text-[13px] text-black tracking-widest leading-none mb-1">★★★★★</div>
+              <div className="text-[14px] font-bold text-neutral-600 leading-none" style={{ fontFamily: "'DM Sans',sans-serif" }}>99+ Happy clients</div>
+            </div>
+          </div>
+
+          {/* SCROLLING RIGHT: Logos Marquee */}
+          <div 
+            className="flex-1 relative overflow-hidden" 
+            style={{ 
+              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', 
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' 
+            }}
+          >
+            <div className="flex items-center w-max animate-[marquee_25s_linear_infinite]">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex items-center gap-16 px-8">
+                  {/* Luminary */}
+                  <div className="flex items-center gap-3 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-black/5 to-black/20 shadow-inner"></div>
+                    Luminary
+                  </div>
+                  {/* 45 Degrees */}
+                  <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    45 Degrees°
+                  </div>
+                  {/* Codecraft_ */}
+                  <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+                     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z" opacity="0.5"/><path d="M10 10h6v6h-6z"/></svg>
+                    Codecraft_
+                  </div>
+                  {/* Frequencii */}
+                  <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(45 12 12)" /><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-45 12 12)" /></svg>
+                    Frequencii
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ── SCROLL TRIGER for CARDS ── */}
@@ -132,13 +186,6 @@ const currentProgress = useRef(0);
             <AnimatedCards progress={progress} />
           </div>
         </div>
-      </div>
-
-      {/* ── LOGOS STRIP ── */}
-      <div className="border-t border-black/[0.07] py-6 px-12 flex items-center gap-12 overflow-hidden max-w-[1300px] mx-auto">
-        {['Frequencii', 'Kintsugi', 'CoreOS', 'Luminary', 'Codecraft_'].map(l => (
-          <span key={l} className="text-sm font-semibold text-neutral-300 whitespace-nowrap">{l}</span>
-        ))}
       </div>
 
       {/* ── SPEAK TO ME floating CTA ── */}
