@@ -143,24 +143,43 @@ const currentProgress = useRef(0);
 
       {/* ── SPEAK TO ME floating CTA ── */}
       <div
-        className="fixed bottom-7 left-1/2 -translate-x-1/2 z-50
-                   bg-white/30 backdrop-blur-md rounded-full
-                   pl-6 pr-2 py-2 flex items-center gap-4
-                   shadow-[0_8px_32px_rgba(0,0,0,0.15)]
-                   border border-white/50
-                   transition-opacity duration-500"
-        style={{ opacity: progress > 0.3 ? 1 : 0 }}
+        className="group fixed left-1/2 z-50
+                   bg-white/40 backdrop-blur-sm rounded-full
+                   pl-6 group-hover:pl-1.5 pr-1.5 py-1.5 flex items-center
+                   shadow-[0_8px_32px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.9)]
+                   border border-white/40
+                   transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{
+          bottom: '32px',
+          opacity: progress > 0.3 ? 1 : 0,
+          transform: progress > 0.3 ? 'translate(-50%, 0)' : 'translate(-50%, 120px)',
+          pointerEvents: progress > 0.3 ? 'auto' : 'none'
+        }}
       >
-        <div>
-          <div className="text-[15px] font-bold text-black leading-tight tracking-tight">Speak to me</div>
-          <div className="text-[13px] text-neutral-600 font-medium mt-0.5">Email or book a call</div>
+        <div className="flex flex-col whitespace-nowrap overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[200px] opacity-100 group-hover:max-w-0 group-hover:opacity-0 mr-6 group-hover:mr-0">
+          <div className="text-[16px] font-bold text-black leading-tight tracking-tight" style={{ fontFamily: "'Inter', 'DM Sans', sans-serif" }}>Speak to me</div>
+          <div className="text-[13px] text-black/50 font-semibold mt-0.5">Email or book a call</div>
         </div>
-        <div className="flex gap-2 ml-2">
-          <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-lg cursor-pointer hover:bg-neutral-800 transition-all shadow-md">
-            ✉
+        
+        <div className="flex gap-1.5 items-center cursor-default">
+          <div className="h-[46px] min-w-[46px] px-[12px] group-hover:px-6 rounded-full bg-[#0a0a0a] border border-white/10 text-white flex items-center justify-center shadow-[inset_0_1px_2px_rgba(255,255,255,0.2),0_4px_12px_rgba(0,0,0,0.2)] cursor-pointer hover:bg-black hover:scale-[1.02] active:scale-95 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+            <svg className="shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" />
+            </svg>
+            <span className="font-semibold text-[15px] tracking-wide overflow-hidden whitespace-nowrap transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2.5">Contact</span>
           </div>
-          <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center text-lg cursor-pointer hover:bg-neutral-50 transition-all shadow-md">
-            📅
+
+          <div className="h-[46px] min-w-[46px] px-[12px] group-hover:px-6 rounded-full bg-white text-black flex items-center justify-center border border-black/5 shadow-[0_4px_12px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-gray-50 hover:scale-[1.02] active:scale-95 transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden">
+            <svg className="shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <path d="M3 10H21V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V10Z" fill="currentColor" stroke="none" />
+              <path d="M9 16l2 2 4-4" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="font-semibold text-[15px] tracking-wide overflow-hidden whitespace-nowrap transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-w-0 opacity-0 group-hover:max-w-[110px] group-hover:opacity-100 group-hover:ml-2.5">Book a call</span>
           </div>
         </div>
       </div>
