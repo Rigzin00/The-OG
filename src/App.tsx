@@ -47,15 +47,19 @@ const currentProgress = useRef(0);
   }, [onScroll]);
 
   return (
-    <div className="bg-[#f5f5f0] min-h-screen relative overflow-x-clip">
+<div className="bg-[#f5f5f0] min-h-screen relative overflow-x-clip">
+      {/* ── GLOBAL BACKGROUND GRID ── */}
+      <div className="fixed inset-0 pointer-events-none flex justify-center z-0">
+        <div className="w-full max-w-[1300px] h-full border-x border-black/[0.08]"></div>
+      </div>
+
       <Navbar />
 
       {/* ── HERO CONTENT ── */}
       <div className="max-w-[1300px] mx-auto px-10 grid grid-cols-2 min-h-screen relative z-10 pointer-events-none">
         {/* LEFT — sticky text */}
         <div className="sticky top-0 h-screen flex flex-col justify-center pr-12 pointer-events-auto">
-          <div className="w-9 h-9 rounded-full bg-white border border-black/10 shadow-sm mb-7
-                          animate-[fadeUp_.5s_ease_both]" />
+          
 
           <h1
             className="font-black leading-[1.0] tracking-[-0.04em] mb-5
