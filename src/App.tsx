@@ -4,7 +4,6 @@ import { AnimatedCards } from './components/Animcard';
 
 function App() {
   const [progress, setProgress]   = useState(0);
-  const [showHint, setShowHint]   = useState(true);
   const heroRightRef              = useRef<HTMLDivElement>(null);
 
 const currentProgress = useRef(0);
@@ -14,13 +13,11 @@ const currentProgress = useRef(0);
   const onScroll = useCallback(() => {
     if (!heroRightRef.current) return;
     const rect  = heroRightRef.current.getBoundingClientRect();
-    const total = heroRightRef.current.offsetHeight - window.innerHeight;       
     // Lock progress to exactly viewport height: 1 progress unit = 100vh scroll.
     // This makes the transition to "overScroll" perfectly match native browser scroll speed.
     let p = -rect.top / window.innerHeight;
     p = Math.max(0, p);
     targetProgress.current = p;
-    setShowHint(p < 0.04);
   }, []);
 
   useEffect(() => {

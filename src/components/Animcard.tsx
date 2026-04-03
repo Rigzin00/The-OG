@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 interface CardData {
   id: string; bg: string; accent: string; label: string; sub: string;
@@ -115,9 +115,25 @@ export function AnimatedCards({ progress }: AnimatedCardsProps) {
   const [size, setSize] = useState({ w:600, h:600 });
 
   useEffect(()=>{
-    const obs = new ResizeObserver(([e])=>setSize({ w:e.contentRect.width, h:e.contentRect.height }));
-    if(containerRef.current) obs.observe(containerRef.current);
-    return ()=>obs.disconnect();
+    const syncSize = () => {
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setSize({ w: rect.width, h: rect.height });
+    };
+
+    syncSize();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const obs = new ResizeObserver(([e]) =>
+        setSize({ w: e.contentRect.width, h: e.contentRect.height })
+      );
+      if (containerRef.current) obs.observe(containerRef.current);
+      return () => obs.disconnect();
+    }
+
+    window.addEventListener('resize', syncSize);
+    return () => window.removeEventListener('resize', syncSize);
   },[]);
 
   // We limit the intro animation to the 0-1 range.
