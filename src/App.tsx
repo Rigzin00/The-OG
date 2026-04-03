@@ -70,7 +70,7 @@ const currentProgress = useRef(0);
           <p className="text-base leading-relaxed max-w-sm mb-8
                         animate-[fadeUp_.6s_.18s_ease_both] opacity-0 [animation-fill-mode:both]">
             <strong className="text-black font-semibold">
-              Strategic softwware that drives growth, not just works fine.{' '}
+              Strategic software that drives growth, not just works fine.{' '}
             </strong>
             <span className="text-neutral-500">
               We create everything your brand needs to attract customers and turn them into sales.
@@ -192,9 +192,8 @@ const currentProgress = useRef(0);
       </div>
 
       {/* ── SCROLL TRIGER for CARDS ── */}
-      {/* We make the scroll container much taller to give plenty of room to scroll down through the cards */}
-      {/* We'll use 350vh so it maps beautifully to standard scroll without making it artificially too deep */}
-      <div ref={heroRightRef} className="min-h-[350vh] relative -mt-[100vh]">   
+      {/* Keep enough room for the card transition + reveal, without trailing blank space. */}
+      <div ref={heroRightRef} className="min-h-[300vh] relative -mt-[100vh]">   
         <div className="sticky top-0 w-full h-screen overflow-hidden z-20 pointer-events-none">
           <div className="absolute inset-0">
             <AnimatedCards progress={progress} />
