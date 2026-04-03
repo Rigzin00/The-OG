@@ -202,21 +202,13 @@ const currentProgress = useRef(0);
       </div>
 
       <footer className="relative z-20 border-t border-black/[0.08] bg-[#f5f5f0]">
-        <div className="max-w-[1300px] mx-auto px-6 py-10 text-center">
-          <div
-            className="flex items-center justify-center gap-4 text-[12px] tracking-[0.08em] uppercase"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            <a href="#" className="text-black/70 hover:text-black transition-colors duration-300">Terms and Conditions</a>
-            <span className="text-black/25">|</span>
-            <a href="#" className="text-black/70 hover:text-black transition-colors duration-300">Privacy Policy</a>
-          </div>
-          <p
-            className="mt-3 text-[11px] tracking-[0.12em] uppercase text-black/45"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Copyright The OG
-          </p>
+        <div
+          className="max-w-[1300px] mx-auto px-6 py-8 grid grid-cols-3 items-center gap-4 text-[12px] tracking-[0.08em] uppercase"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          <a href="#" className="justify-self-start text-black/70 hover:text-black transition-colors duration-300">Terms and Conditions</a>
+          <p className="justify-self-center text-[11px] tracking-[0.12em] text-black/45">© The OG</p>
+          <a href="#" className="justify-self-end text-black/70 hover:text-black transition-colors duration-300">Privacy Policy</a>
         </div>
       </footer>
 
