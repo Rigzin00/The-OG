@@ -4,7 +4,10 @@ import { AnimatedCards } from './components/Animcard';
 
 function App() {
   const [progress, setProgress]   = useState(0);
+  const [footerReached, setFooterReached] = useState(false);
+  const [ctaExitPhase, setCtaExitPhase] = useState<'idle' | 'stretch' | 'drop'>('idle');
   const heroRightRef              = useRef<HTMLDivElement>(null);
+  const footerRef                 = useRef<HTMLElement>(null);
 
 const currentProgress = useRef(0);
   const targetProgress = useRef(0);
@@ -18,7 +21,24 @@ const currentProgress = useRef(0);
     let p = -rect.top / window.innerHeight;
     p = Math.max(0, p);
     targetProgress.current = p;
+
+    if (footerRef.current) {
+      const footerRect = footerRef.current.getBoundingClientRect();
+      setFooterReached(footerRect.top <= window.innerHeight * 0.95);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!footerReached) {
+      setCtaExitPhase('idle');
+      return;
+    }
+
+    setCtaExitPhase('stretch');
+    const timer = window.setTimeout(() => setCtaExitPhase('drop'), 80);
+
+    return () => window.clearTimeout(timer);
+  }, [footerReached]);
 
   useEffect(() => {
     const updateProgress = () => {
@@ -201,7 +221,7 @@ const currentProgress = useRef(0);
         </div>
       </div>
 
-      <footer className="relative z-20 border-t border-black/[0.08] bg-[#f5f5f0]">
+      <footer ref={footerRef} className="relative z-20 border-t border-black/[0.08] bg-[#f5f5f0]">
         <div
           className="max-w-[1300px] mx-auto px-6 py-8 grid grid-cols-3 items-center gap-4 text-[12px] tracking-[0.08em] uppercase"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
@@ -222,9 +242,19 @@ const currentProgress = useRef(0);
                    transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{
           bottom: '32px',
-          opacity: progress > 0.3 ? 1 : 0,
-          transform: progress > 0.3 ? 'translate(-50%, 0)' : 'translate(-50%, 120px)',
-          pointerEvents: progress > 0.3 ? 'auto' : 'none'
+          opacity: footerReached && ctaExitPhase === 'drop' ? 0 : progress > 0.3 ? 1 : 0,
+          transform:
+            footerReached && ctaExitPhase === 'stretch'
+              ? 'translate(-50%, -8px) scale(1.03, 0.94)'
+              : footerReached && ctaExitPhase === 'drop'
+                ? 'translate(-50%, 320px) scale(0.74, 1.14)'
+                : progress > 0.3
+                  ? 'translate(-50%, 0)'
+                  : 'translate(-50%, 120px)',
+          pointerEvents: footerReached || progress <= 0.3 ? 'none' : 'auto',
+          transformOrigin: 'center bottom',
+          transitionDuration: footerReached && ctaExitPhase === 'drop' ? '5500ms' : footerReached && ctaExitPhase === 'stretch' ? '220ms' : '600ms',
+          transitionTimingFunction: footerReached && ctaExitPhase === 'drop' ? 'cubic-bezier(0.08, 0.78, 0.08, 1)' : 'cubic-bezier(0.16,1,0.3,1)'
         }}
       >
         <div className="flex flex-col whitespace-nowrap overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[200px] opacity-100 group-hover:max-w-0 group-hover:opacity-0 mr-6 group-hover:mr-0">
