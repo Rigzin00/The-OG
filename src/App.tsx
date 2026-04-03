@@ -227,7 +227,7 @@ const currentProgress = useRef(0);
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <a href="#" className="justify-self-start text-black/70 hover:text-black transition-colors duration-300">Terms and Conditions</a>
-          <p className="justify-self-center text-[11px] tracking-[0.12em] text-black/45">© The OG</p>
+          <p className="justify-self-center tracking-[0.12em] text-black/45">© The OG</p>
           <a href="#" className="justify-self-end text-black/70 hover:text-black transition-colors duration-300">Privacy Policy</a>
         </div>
       </footer>
