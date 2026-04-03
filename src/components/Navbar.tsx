@@ -33,7 +33,7 @@ export function Navbar() {
             className="w-[42px] h-[42px] rounded-full object-cover shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
           />
           <span className="font-bold text-[15px] text-black tracking-tight leading-none hover:opacity-80 transition-opacity">
-            Joseph Alexander
+            The OG
           </span>
         </a>
 

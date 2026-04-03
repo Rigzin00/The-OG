@@ -63,17 +63,17 @@ const currentProgress = useRef(0);
                        animate-[fadeUp_.6s_.08s_ease_both] opacity-0 [animation-fill-mode:both]"
             style={{ fontSize: 'clamp(42px,4.8vw,66px)', fontFamily: "'Syne',sans-serif" }}
           >
-            <span className="text-[#b8b8b0] block">Design that</span>
+            <span className="text-[#b8b8b0] block">Software that</span>
             <span className="text-black block">delivers results.</span>
           </h1>
 
           <p className="text-base leading-relaxed max-w-sm mb-8
                         animate-[fadeUp_.6s_.18s_ease_both] opacity-0 [animation-fill-mode:both]">
             <strong className="text-black font-semibold">
-              Strategic design that drives growth, not just looks good.{' '}
+              Strategic softwware that drives growth, not just works fine.{' '}
             </strong>
             <span className="text-neutral-500">
-              I create everything your brand needs to attract customers and turn them into sales.
+              We create everything your brand needs to attract customers and turn them into sales.
             </span>
           </p>
 
@@ -117,7 +117,7 @@ const currentProgress = useRef(0);
               {/* Invisible Spacer to push the text */}
               <div className="transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-0 group-hover:w-[74px]"></div>
             </div>
-            <span className="tracking-tight whitespace-nowrap">Book a call with me</span>
+            <span className="tracking-tight whitespace-nowrap">Book a call with us</span>
           </button>
         </div>
 
@@ -149,7 +149,7 @@ const currentProgress = useRef(0);
             </div>
             <div>
               <div className="text-[13px] text-black tracking-widest leading-none mb-1">★★★★★</div>
-              <div className="text-[14px] font-bold text-neutral-600 leading-none" style={{ fontFamily: "'DM Sans',sans-serif" }}>99+ Happy clients</div>
+              <div className="text-[14px] font-bold text-neutral-600 leading-none" style={{ fontFamily: "'DM Sans',sans-serif" }}>10+ Happy clients</div>
             </div>
           </div>
 
@@ -167,22 +167,22 @@ const currentProgress = useRef(0);
                   {/* Luminary */}
                   <div className="flex items-center gap-3 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
                     <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-black/5 to-black/20 shadow-inner"></div>
-                    Luminary
+                    HHTrails
                   </div>
                   {/* 45 Degrees */}
                   <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-                    45 Degrees°
+                    ICGAIFE
                   </div>
                   {/* Codecraft_ */}
                   <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
                      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z" opacity="0.5"/><path d="M10 10h6v6h-6z"/></svg>
-                    Codecraft_
+                    SNIVRA
                   </div>
                   {/* Frequencii */}
                   <div className="flex items-center gap-2.5 text-[22px] font-bold text-black/30 tracking-tight" style={{ fontFamily: "'DM Sans',sans-serif" }}>
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(45 12 12)" /><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-45 12 12)" /></svg>
-                    Frequencii
+                    Walnut Snowveil
                   </div>
                 </div>
               ))}
@@ -218,7 +218,7 @@ const currentProgress = useRef(0);
         }}
       >
         <div className="flex flex-col whitespace-nowrap overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] max-w-[200px] opacity-100 group-hover:max-w-0 group-hover:opacity-0 mr-6 group-hover:mr-0">
-          <div className="text-[16px] font-bold text-black leading-tight tracking-tight" style={{ fontFamily: "'Inter', 'DM Sans', sans-serif" }}>Speak to me</div>
+          <div className="text-[16px] font-bold text-black leading-tight tracking-tight" style={{ fontFamily: "'Inter', 'DM Sans', sans-serif" }}>Speak to us</div>
           <div className="text-[13px] text-black/50 font-semibold mt-0.5">Email or book a call</div>
         </div>
         
