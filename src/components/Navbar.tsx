@@ -45,7 +45,7 @@ export function Navbar() {
           }`}
         >
           <ul className="flex items-center gap-8 list-none m-0 p-0 pl-6 pr-8 border-l border-transparent">
-            {['Work', 'About', 'Services' ].map((link) => (
+            {['Works', 'About', 'Services' ].map((link) => (
               <li key={link}>
                 <Link
                   to={`/${link.toLowerCase()}`}
