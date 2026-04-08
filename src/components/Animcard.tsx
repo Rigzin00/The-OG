@@ -23,7 +23,7 @@ const INIT_STATES = [
   { x: 40, y:-10, rot:  9, initZ:0 },
 ];
 
-function CardMockup({ card, hovered }: { card: CardData; hovered: boolean }) {
+export function CardMockup({ card, hovered }: { card: CardData; hovered: boolean }) {
   return (
     <div style={{ width:'100%', height:'100%', background:card.bg, position:'relative', padding:'18px 20px', display:'flex', flexDirection:'column', overflow:'hidden' }}>
       {/* Navbar row */}

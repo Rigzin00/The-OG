@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +27,7 @@ export function Navbar() {
         style={{ fontFamily: "'DM Sans', sans-serif" }}
       >
         {/* Profile */}
-        <a href="#" className="flex items-center gap-3 no-underline pl-1 pr-2 whitespace-nowrap">
+        <Link to="/" className="flex items-center gap-3 no-underline pl-1 pr-2 whitespace-nowrap">
           <img 
             src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" 
             alt="Joseph Alexander" 
@@ -35,7 +36,7 @@ export function Navbar() {
           <span className="font-bold text-[15px] text-black tracking-tight leading-none hover:opacity-80 transition-opacity">
             The OG
           </span>
-        </a>
+        </Link>
 
         {/* Links + Contact (Collapses on Scroll) */}
         <div 
@@ -44,14 +45,14 @@ export function Navbar() {
           }`}
         >
           <ul className="flex items-center gap-8 list-none m-0 p-0 pl-6 pr-8 border-l border-transparent">
-            {['Work', 'About', 'Services', ].map((link) => (
+            {['Work', 'About', 'Services' ].map((link) => (
               <li key={link}>
-                <a
-                  href="#"
+                <Link
+                  to={`/${link.toLowerCase()}`}
                   className="text-[15px] font-bold text-black no-underline hover:text-neutral-500 transition-colors whitespace-nowrap"
                 >
                   {link}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
