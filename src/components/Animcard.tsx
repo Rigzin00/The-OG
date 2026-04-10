@@ -146,16 +146,21 @@ export function AnimatedCards({ progress }: AnimatedCardsProps) {
   
   const { w:W, h:H } = size;
   const gap = 20;
+  const compactT = clamp((1024 - W) / 384, 0, 1);
+  const stackedScale = W < 1024 ? lerp(0.86, 0.68, compactT) : 1;
+  const isTabletAndUp = W >= 768;
 
   // Final layout geometry
   const marginW = Math.max(40, W * 0.05);
   const topMargin = Math.max(120, H * 0.15); 
-  
-  const finalW = (W - marginW * 2 - gap) / 2;
-  const finalH = H * 0.65; // Cards take up 65% of the viewport height each
+
+  const columnW = (W - marginW * 2 - gap) / 2;
+  const finalW = columnW;
+  const finalH = isTabletAndUp ? finalW * 0.62 : H * 0.65;
 
   // Base size when stacked
-  const baseW = 420, baseH = 260;
+  const baseW = 420 * stackedScale;
+  const baseH = 260 * stackedScale;
 
   return (
     <div ref={containerRef} style={{ position:'relative', width:'100%', height:'100%', overflow:'hidden', pointerEvents:'none' }}>
@@ -177,7 +182,7 @@ export function AnimatedCards({ progress }: AnimatedCardsProps) {
 
         // At t=1, they form a vertical-overflow layout
         // Instead of splitting the space to fit all 4, we treat row=0 and row=1 drastically differently.
-        const finCX = marginW + (col === 0 ? finalW / 2 : finalW + gap + finalW / 2);
+        const finCX = marginW + (col === 0 ? columnW / 2 : columnW + gap + columnW / 2);
         
         // Push row 1 way down below the screen initially
         const finCY = topMargin + (row === 0 ? finalH / 2 : finalH + gap + finalH / 2);

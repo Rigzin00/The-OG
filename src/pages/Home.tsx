@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Navbar } from '../components/Navbar';
-import { AnimatedCards } from '../components/Animcard';
+import { AnimatedCards, CARD_DATA, CardMockup } from '../components/Animcard';
 
 export default function Home() {
   const [progress, setProgress]   = useState(0);
@@ -73,9 +73,9 @@ const currentProgress = useRef(0);
       <Navbar />
 
       {/* ── HERO CONTENT ── */}
-      <div className="max-w-[1300px] mx-auto px-10 grid grid-cols-2 min-h-screen relative z-10 pointer-events-none">
+      <div className="max-w-[1300px] mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 md:min-h-screen relative z-10 pointer-events-none pt-28 md:pt-0 pb-10 md:pb-0">
         {/* LEFT — sticky text */}
-        <div className="sticky top-0 h-screen flex flex-col justify-center pr-12 pointer-events-auto">
+        <div className="relative md:sticky md:top-0 h-auto md:h-screen flex flex-col justify-center pr-0 md:pr-12 py-4 md:py-0 pointer-events-auto">
           
 
           <h1
@@ -142,12 +142,12 @@ const currentProgress = useRef(0);
         </div>
 
         {/* This invisible column just to maintain grid structure */}
-        <div className="relative pointer-events-none"></div>
+        <div className="hidden md:block relative pointer-events-none"></div>
       </div>
 
       {/* ── LOGOS STRIP (Placed just after the Hero / Landing page) ── */}
-      <div className="absolute top-[100vh] left-0 w-full z-10 bg-[#f5f5f0] border-t border-b border-black/[0.07] pointer-events-auto">
-        <div className="py-10 px-10 flex items-center justify-between gap-8 max-w-[1300px] w-full mx-auto overflow-hidden">
+      <div className="relative md:absolute md:top-[100vh] left-0 w-full z-10 bg-[#f5f5f0] border-t border-b border-black/[0.07] pointer-events-auto">
+        <div className="py-8 md:py-10 px-5 md:px-10 flex items-center justify-between gap-5 md:gap-8 max-w-[1300px] w-full mx-auto overflow-hidden">
           {/* STATIC LEFT: Social Proof */}
           <div className="flex items-center gap-4 shrink-0">
             <div className="flex">
@@ -211,9 +211,30 @@ const currentProgress = useRef(0);
         </div>
       </div>
 
-      {/* ── SCROLL TRIGER for CARDS ── */}
+      {/* ── MOBILE FINAL CARD SHOWCASE (No intro stack / no animation) ── */}
+      <section className="md:hidden relative z-10 bg-[#f5f5f0] px-5 pt-8 pb-14 pointer-events-auto">
+        <div className="max-w-[620px] mx-auto space-y-7">
+          {CARD_DATA.map((card) => (
+            <article key={card.id}>
+              <div className="rounded-[24px] overflow-hidden border border-black/10 bg-white shadow-[0_18px_45px_rgba(0,0,0,0.14)]">
+                <div className="aspect-[4/3]">
+                  <CardMockup card={card} hovered={false} />
+                </div>
+              </div>
+              <p
+                className="mt-3 text-[30px] leading-none tracking-[-0.03em] font-semibold text-[#111]"
+                style={{ fontFamily: "'Syne',sans-serif" }}
+              >
+                {card.label.replace('®', '').replace('™', '')}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── SCROLL TRIGER for CARDS (Desktop only) ── */}
       {/* Keep enough room for the card transition + reveal, without trailing blank space. */}
-      <div ref={heroRightRef} className="min-h-[240vh] relative -mt-[100vh]">   
+      <div ref={heroRightRef} className="hidden md:block min-h-[240vh] relative -mt-[100vh]">   
         <div className="sticky top-0 w-full h-screen overflow-hidden z-20 pointer-events-none">
           <div className="absolute inset-0">
             <AnimatedCards progress={progress} />
