@@ -3,6 +3,24 @@ import { Link } from 'react-router-dom';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNarrowViewport, setIsNarrowViewport] = useState(false);
+
+  const compactMode = isScrolled || isNarrowViewport;
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 529px)');
+    const syncViewport = () => setIsNarrowViewport(media.matches);
+
+    syncViewport();
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', syncViewport);
+      return () => media.removeEventListener('change', syncViewport);
+    }
+
+    media.addListener(syncViewport);
+    return () => media.removeListener(syncViewport);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +59,7 @@ export function Navbar() {
         {/* Links + Contact (Collapses on Scroll) */}
         <div 
           className={`flex items-center overflow-hidden transition-all duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            isScrolled ? 'max-w-0 opacity-0' : 'max-w-[500px] opacity-100'
+            compactMode ? 'max-w-0 opacity-0' : 'max-w-[500px] opacity-100'
           }`}
         >
           <ul className="flex items-center gap-8 list-none m-0 p-0 pl-6 pr-8 border-l border-transparent">
@@ -67,7 +85,7 @@ export function Navbar() {
         {/* 3 Dots Menu (Appears on Scroll) */}
         <div 
           className={`flex items-center justify-center overflow-hidden transition-all duration-[700ms] ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer ${
-            isScrolled ? 'max-w-[40px] opacity-100 px-3' : 'max-w-0 opacity-0 px-0'
+            compactMode ? 'max-w-[40px] opacity-100 px-3' : 'max-w-0 opacity-0 px-0'
           }`}
         >
           <div className="flex gap-1.5 hover:opacity-70 transition-opacity py-2 px-1">
