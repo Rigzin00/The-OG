@@ -261,7 +261,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         transition={{ duration: 0.4 }}
       />
 
-      <div className="relative z-10 p-7 md:p-9">
+      <div className="relative z-10 p-5 sm:p-7 md:p-9">
         {/* Top row */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-center gap-4">
@@ -306,7 +306,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           className="font-black tracking-tight leading-[1.05] mb-2"
           animate={{ color: hovered ? '#fff' : '#0a0a0a' }}
           transition={{ duration: 0.4 }}
-          style={{ fontSize: 'clamp(22px,2.5vw,30px)', fontFamily: "'Syne',sans-serif" }}
+          style={{ fontSize: 'clamp(20px,2.5vw,30px)', fontFamily: "'Syne',sans-serif" }}
         >
           {service.title}
         </motion.h3>
@@ -414,7 +414,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       {/* Background index ghost number */}
       <motion.div
         className="absolute -right-2 -bottom-5 font-black leading-none pointer-events-none select-none"
-        style={{ fontSize: 'clamp(64px,9vw,110px)', fontFamily: "'Syne',sans-serif" }}
+        style={{ fontSize: 'clamp(48px,9vw,110px)', fontFamily: "'Syne',sans-serif" }}
         animate={{ color: hovered ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.035)' }}
         transition={{ duration: 0.5 }}
       >
@@ -530,14 +530,14 @@ export default function Services() {
               delay={0.1}
               stagger={0.08}
               className="text-[#b0b0a8] font-black tracking-[-0.045em] leading-[0.9]"
-              style={{ fontSize: 'clamp(36px,8vw,120px)', fontFamily: "'Syne',sans-serif" }}
+              style={{ fontSize: 'clamp(32px,8vw,120px)', fontFamily: "'Syne',sans-serif" }}
             />
             <AnimatedWords
               text="One standard."
               delay={0.25}
               stagger={0.09}
               className="text-black font-black tracking-[-0.045em] leading-[0.9]"
-              style={{ fontSize: 'clamp(36px,8vw,120px)', fontFamily: "'Syne',sans-serif" }}
+              style={{ fontSize: 'clamp(32px,8vw,120px)', fontFamily: "'Syne',sans-serif" }}
             />
           </div>
 
@@ -655,7 +655,7 @@ export default function Services() {
           {PROCESS_STEPS.map((step, i) => (
             <Reveal key={step.num} delay={i * 0.08}>
               <motion.div
-                className="rounded-[24px] border border-black/[0.08] p-7 bg-[#fafaf8] flex flex-col gap-4 h-full"
+                className="rounded-[24px] border border-black/[0.08] p-6 md:p-7 bg-[#fafaf8] flex flex-col gap-4 h-full"
                 whileHover={{ y: -4, boxShadow: '0 24px 60px rgba(0,0,0,0.1)' }}
                 transition={{ duration: 0.4, ease: EASE }}
               >
@@ -756,12 +756,12 @@ export default function Services() {
       {/* ── FOOTER ── */}
       <footer className="relative z-20 border-t border-black/[0.08] bg-[#f5f5f0]">
         <div
-          className="max-w-[1300px] mx-auto px-6 py-8 grid grid-cols-3 items-center gap-4 text-[12px] tracking-[0.08em] uppercase"
+          className="max-w-[1300px] mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] tracking-[0.08em] uppercase"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          <a href="#" className="justify-self-start text-black/70 hover:text-black transition-colors duration-300">Terms</a>
-          <p className="justify-self-center tracking-[0.12em] text-black/40">© The OG</p>
-          <a href="#" className="justify-self-end text-black/70 hover:text-black transition-colors duration-300">Privacy</a>
+          <a href="#" className="text-black/70 hover:text-black transition-colors duration-300">Terms</a>
+          <p className="tracking-[0.12em] text-black/40">© The OG</p>
+          <a href="#" className="text-black/70 hover:text-black transition-colors duration-300">Privacy</a>
         </div>
       </footer>
 
