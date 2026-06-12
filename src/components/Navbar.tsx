@@ -74,12 +74,12 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="bg-[#f7f7f7] border border-neutral-200/60 rounded-full px-6 py-2.5 text-[15px] font-bold text-black no-underline hover:bg-[#e5e5e5] transition-colors leading-none shrink-0 whitespace-nowrap shadow-sm"
           >
             Contact
-          </a>
+          </Link>
         </div>
 
         {/* 3 Dots Menu (Appears on Scroll) */}
