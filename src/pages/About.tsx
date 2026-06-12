@@ -328,7 +328,7 @@ export default function About() {
       {/* ══════════════════════════════════════
           HERO — "We build what others pitch."
       ══════════════════════════════════════ */}
-      <div ref={heroRef} className="relative min-h-screen flex flex-col justify-end pb-20 md:pb-28 pt-36">
+      <div ref={heroRef} className="relative min-h-[100svh] flex flex-col justify-end pb-16 md:pb-28 pt-28 md:pt-36">
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-10 w-full"
@@ -356,14 +356,14 @@ export default function About() {
               delay={0.1}
               stagger={0.08}
               className="text-[#b0b0a8] font-black tracking-[-0.045em] leading-[0.9]"
-              style={{ fontSize: 'clamp(52px,8vw,120px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+              style={{ fontSize: 'clamp(36px,8vw,120px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
             />
             <AnimatedWords
               text="others pitch."
               delay={0.25}
               stagger={0.09}
               className="text-black font-black tracking-[-0.045em] leading-[0.9]"
-              style={{ fontSize: 'clamp(52px,8vw,120px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+              style={{ fontSize: 'clamp(36px,8vw,120px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
             />
           </div>
 
@@ -371,7 +371,7 @@ export default function About() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
             <Reveal delay={0.45} className="max-w-[480px]">
               <p
-                className="text-[17px] leading-[1.7] text-neutral-500"
+                className="text-[15px] md:text-[17px] leading-[1.7] text-neutral-500"
                 style={{ fontFamily: "'DM Sans',sans-serif" }}
               >
                 The OG is a boutique digital studio obsessed with one thing:{' '}
@@ -382,7 +382,7 @@ export default function About() {
             <Reveal delay={0.55}>
               <motion.a
                 href="#"
-                className="inline-flex items-center gap-3 bg-[#0a0a0a] text-white rounded-full px-7 py-4 text-[15px] font-bold no-underline shrink-0"
+                className="flex justify-center items-center gap-3 bg-[#0a0a0a] text-white rounded-full px-7 py-4 text-[15px] font-bold no-underline shrink-0 w-full md:w-auto"
                 style={{ fontFamily: "'DM Sans',sans-serif", boxShadow: '0 12px 40px rgba(0,0,0,0.25),inset 0 1px 2px rgba(255,255,255,0.1)' }}
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
@@ -455,7 +455,7 @@ export default function About() {
               delay={0.05}
               stagger={0.055}
               className="font-black tracking-[-0.035em] leading-[1.05] text-black mb-8"
-              style={{ fontSize: 'clamp(30px,4vw,54px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+              style={{ fontSize: 'clamp(22px,4vw,54px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
             />
             <Reveal delay={0.5}>
               <p className="text-[16px] leading-[1.75] text-neutral-500 mb-5" style={{ fontFamily: "'DM Sans',sans-serif" }}>
@@ -487,7 +487,7 @@ export default function About() {
               <div className="flex flex-col gap-1">
                 <div
                   className="font-black text-black leading-none tracking-[-0.04em]"
-                  style={{ fontSize: 'clamp(48px,5.5vw,76px)', fontFamily: "'Syne',sans-serif" }}
+                  style={{ fontSize: 'clamp(36px,5.5vw,76px)', fontFamily: "'Syne',sans-serif" }}
                 >
                   <Counter to={s.val} suffix={s.suf} />
                 </div>
@@ -510,7 +510,7 @@ export default function About() {
 
           {/* Visual - stacked cards */}
           <Reveal delay={0.05} className="order-2 lg:order-1">
-            <div className="relative w-full max-w-[460px] mx-auto" style={{ aspectRatio: '1/1' }}>
+            <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[460px] mx-auto" style={{ aspectRatio: '1/1' }}>
               {/* Layer 3 — dark back */}
               <motion.div
                 className="absolute rounded-[28px]"
@@ -600,7 +600,7 @@ export default function About() {
               delay={0.06}
               stagger={0.06}
               className="font-black tracking-[-0.04em] leading-[1.0] text-black mb-8"
-              style={{ fontSize: 'clamp(32px,4vw,52px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+              style={{ fontSize: 'clamp(24px,4vw,52px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
             />
             <Reveal delay={0.4}>
               <p className="text-[15px] leading-[1.75] text-neutral-500 mb-5" style={{ fontFamily: "'DM Sans',sans-serif" }}>
@@ -631,7 +631,7 @@ export default function About() {
             delay={0.05}
             stagger={0.055}
             className="font-black tracking-[-0.035em] leading-[1.05] text-black"
-            style={{ fontSize: 'clamp(28px,3.8vw,50px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+            style={{ fontSize: 'clamp(20px,3.8vw,50px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
           />
         </div>
 
@@ -659,7 +659,7 @@ export default function About() {
             delay={0.05}
             stagger={0.06}
             className="font-black tracking-[-0.035em] leading-[1.05] text-black"
-            style={{ fontSize: 'clamp(28px,3.8vw,50px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+            style={{ fontSize: 'clamp(20px,3.8vw,50px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
           />
         </div>
 
@@ -732,14 +732,14 @@ export default function About() {
               style={{ backgroundImage: 'radial-gradient(circle,white 1px,transparent 1px)', backgroundSize: '28px 28px' }}
             />
 
-            <div className="relative z-10 p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+            <div className="relative z-10 p-6 sm:p-10 md:p-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
               <div>
                 <AnimatedWords
                   text="Ready to build something original?"
                   delay={0.05}
                   stagger={0.05}
                   className="text-white font-black tracking-[-0.04em] leading-[1.05] mb-5"
-                  style={{ fontSize: 'clamp(28px,4vw,52px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
+                  style={{ fontSize: 'clamp(22px,4vw,52px)', fontFamily: "'Syne',sans-serif" } as React.CSSProperties}
                 />
                 <Reveal delay={0.45}>
                   <p className="text-white/40 text-[15px] leading-relaxed max-w-md" style={{ fontFamily: "'DM Sans',sans-serif" }}>
@@ -748,10 +748,10 @@ export default function About() {
                 </Reveal>
               </div>
 
-              <Reveal delay={0.5} className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <Reveal delay={0.5} className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto">
                 <motion.a
                   href="#"
-                  className="flex items-center gap-3 bg-white text-black rounded-full px-7 py-4 text-[15px] font-bold no-underline"
+                  className="flex items-center justify-center gap-3 bg-white text-black rounded-full px-7 py-4 text-[15px] font-bold no-underline"
                   style={{ fontFamily: "'DM Sans',sans-serif", boxShadow: '0 8px 28px rgba(255,255,255,0.12)' }}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.97 }}
