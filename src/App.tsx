@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Home from './pages/Home';
 import Work from './pages/Work';
 import About from './pages/About';
+import Services from './pages/Services';
 import LoadingPage from './pages/Loading';
 
 function AppRoutes() {
@@ -14,6 +15,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/works" element={<Work />} />
         <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
     </AnimatePresence>
   );
